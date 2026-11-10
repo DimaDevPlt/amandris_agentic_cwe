@@ -136,7 +136,7 @@
   <servlet-class>com.amandris.clients.web.benchmark.CWE639_IdorMessageServlet</servlet-class>
  </servlet>
  <servlet>
-  <servlet-name>benchmark-censor</servlet-name>
+  <servlet-name>benchmark-admin-delete-buyers</servlet-name>
   <servlet-class>com.amandris.clients.web.benchmark.CWE862_MissingAuthorizationServlet</servlet-class>
  </servlet>
  <servlet>
@@ -268,8 +268,8 @@
   <url-pattern>/benchmark/message</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>benchmark-censor</servlet-name>
-  <url-pattern>/benchmark/censor</url-pattern>
+  <servlet-name>benchmark-admin-delete-buyers</servlet-name>
+  <url-pattern>/benchmark/admin/delete-buyers</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>benchmark-delete-account</servlet-name>

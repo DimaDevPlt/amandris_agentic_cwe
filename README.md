@@ -64,4 +64,4 @@ These four cases are in the suite for agentic SAST. The Mend CLI scan above did 
 | CWE-312 | `CWE312_CleartextStorageServlet` saves the buyer password in a `password` column and appends the card number to a text file. `/benchmark/cleartext-storage` |
 | CWE-306 | `CWE306_MissingAuthenticationServlet` deletes a buyer account from `buyerId` and does not read the session. `/benchmark/delete-account` |
 | CWE-639 | `CWE639_IdorMessageServlet` requires a logged-in buyer, then returns the private message selected by `messageId` without comparing that message's owner to the session buyer. `/benchmark/message` |
-| CWE-862 | `CWE862_MissingAuthorizationServlet` requires a logged-in buyer, then removes the seller selected by `sellerId`. Removing a seller is an administrator function. `/benchmark/censor` |
+| CWE-862 | `CWE862_MissingAuthorizationServlet` requires a logged-in buyer, then deletes every buyer account. The session `role` is passed through and never compared to `admin`. `/benchmark/admin/delete-buyers` |

@@ -11,18 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Benchmark case CWE-862. Removing a seller is an administrator function.
- * The handler only checks that some buyer is logged in.
+ * Benchmark case CWE-862. Deleting every buyer account is an administrator function.
+ * The handler checks that a buyer is logged in and does not check the admin role.
  */
 public class CWE862_MissingAuthorizationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private final Map sellers = new HashMap();
+	private final Map buyers = new HashMap();
 
 	public CWE862_MissingAuthorizationServlet() {
-		sellers.put("20", "seller-20");
-		sellers.put("21", "seller-21");
+		buyers.put("10", "buyer-10");
+		buyers.put("11", "buyer-11");
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,14 +36,13 @@ public class CWE862_MissingAuthorizationServlet extends HttpServlet {
 			return;
 		}
 
-		String sellerId = request.getParameter("sellerId");
-		Object removed = sellers.remove(sellerId);
-		if (removed == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return;
-		}
-
+		String role = (String) session.getAttribute("role");
+		deleteAllBuyers(role);
 		response.setContentType("text/plain");
-		response.getWriter().write("seller removed");
+		response.getWriter().write("all buyer accounts deleted");
+	}
+
+	private void deleteAllBuyers(String role) {
+		buyers.clear();
 	}
 }
